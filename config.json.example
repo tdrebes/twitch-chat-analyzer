@@ -1,0 +1,11 @@
+{
+    "options": {
+        "identity": {
+            "username": "xxx",
+            "password": "xxx"
+        },
+        "channels": [
+            "forsen"
+        ]
+    }
+}
