@@ -1,26 +1,32 @@
-const Client = require('./client.js')
-const CommandHandler = require('./commands/commandHandler.js');
-const Mood = require('./message/mood.js');
+import { Client } from './client/client.js';
+import { CommandHandler } from './commands/commandHandler.js';
+import { Message } from './message/message.js';
 
-Client.on('message', onMessageHandler);
-Client.on('connected', onConnectedHandler);
-Client.on('disconnected', onDisconnectedHandler);
-Client.connect();
+const client = new Client();
+const commandHandler = new CommandHandler(client);
+
+client.on('message', onMessageHandler);
+client.on('connected', onConnectedHandler);
+client.on('disconnected', onDisconnectedHandler);
+client.connect();
 
 function onMessageHandler (target, context, msg, self) {
     if (self) { 
         return;
     }
 
-    const message = msg.trim();
+    const messageText = msg.trim();
 
-    if (message.startsWith('$_')) {
-        CommandHandler.handle(target, message);
+    if (messageText.startsWith('$_')) {
+        commandHandler.handle(target, messageText);
         return;
     }
 
-    console.log(`* Read message: ${message}`);
-    console.log(`* Message credit score: ${Mood.sentiment(message).score}`);
+    let message = new Message(messageText, context.username);
+
+    console.log(`* Read message (${message.username}): ${message.text}`);
+    console.log(`* Message credit score: ${message.getSentiment().score}`);
+    console.log(`* `);
 }
 
 function onConnectedHandler (addr, port) {

@@ -1,22 +1,24 @@
-const client = require('../client.js');
+const offset = 2;
 
-let commandHandler = (target, message) => {
-    const command = message.substr(2);
-
-    switch(command) {
-        case "ping":
-            client.say(target, "pong");
-            break;
-        default:
-            console.log(`* Unknown command: ${command}`);
-            return;
+class CommandHandler {
+    constructor(client) {
+        this.client = client;
     }
 
-    console.log(`* Executed command: ${command}`);
-}
+    handle(target, message) {
+        const command = message.substr(offset);
 
-module.exports = {
-    handle: (target, message) => {
-        commandHandler(target, message)
+        switch(command) {
+            case "ping":
+                this.client.say(target, "pong");
+                break;
+            default:s
+                console.log(`* Unknown command: ${command}`);
+                return;
+        }
+
+        console.log(`* Executed command: ${command}`);
     }
 }
+
+export { CommandHandler };

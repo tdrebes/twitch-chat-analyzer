@@ -13,5 +13,5 @@
     "sentiment": "^5.0.2",
     "tmi.js": "^1.8.5"
   },
-  "type": "commonjs"
+  "type": "module"
 }
