@@ -1,5 +1,6 @@
 {
-    "options": {
+    "client": {
+        "options": { "debug": true },
         "identity": {
             "username": "xxx",
             "password": "xxx"

@@ -5,7 +5,7 @@ import config from '../config/config.json';
 class Client {
     client: TMIClient
     constructor() {
-        this.client = new TMIClient(config.options);
+        this.client = new TMIClient(config.client);
     }
 
     say(channel: string, message: string) {
