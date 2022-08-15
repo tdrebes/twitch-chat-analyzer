@@ -8,7 +8,12 @@ class CommandHandler {
         this.client = client;
     }
 
-    handle(target: any, message: string) {
+    handle(message: string, target: any, context: any) {
+        if (!context.mod && !('broadcaster' in context.badges)) {
+            console.log('* Commands require moderator status');
+            return
+        }
+
         const command = message.substring(offset);
 
         switch(command) {

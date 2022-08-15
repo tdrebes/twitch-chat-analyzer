@@ -18,7 +18,7 @@ function onMessageHandler (target: any, context: any, msg: any, self: any) {
     const messageText = msg.trim();
 
     if (messageText.startsWith('$_')) {
-        commandHandler.handle(target, messageText);
+        commandHandler.handle(messageText, target, context);
         return;
     }
 
