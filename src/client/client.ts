@@ -1,19 +1,19 @@
 import { Client as TMIClient } from 'tmi.js';
 
-import { readFileSync } from "fs";
-const config = JSON.parse(readFileSync("./config.json"));
+import config from '../config/config.json';
 
 class Client {
+    client: TMIClient
     constructor() {
         this.client = new TMIClient(config.options);
     }
 
-    say(channel, message) {
+    say(channel: string, message: string) {
         this.client.say(channel, message);
     }
 
-    on(event, callback) {
-        this.client.on(event, callback);
+    on(event: any, listener: (...args: unknown[]) => void) {
+        this.client.on(event, listener);
     }
 
     connect() {

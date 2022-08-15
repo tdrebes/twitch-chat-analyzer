@@ -1,6 +1,6 @@
-import { Client } from './client/client.js';
-import { CommandHandler } from './commands/commandHandler.js';
-import { Message } from './message/message.js';
+import { Client } from './client/client';
+import { CommandHandler } from './commands/commandHandler';
+import { Message } from './message/message';
 
 const client = new Client();
 const commandHandler = new CommandHandler(client);
@@ -10,7 +10,7 @@ client.on('connected', onConnectedHandler);
 client.on('disconnected', onDisconnectedHandler);
 client.connect();
 
-function onMessageHandler (target, context, msg, self) {
+function onMessageHandler (target: any, context: any, msg: any, self: any) {
     if (self) { 
         return;
     }
@@ -29,10 +29,10 @@ function onMessageHandler (target, context, msg, self) {
     console.log(`* `);
 }
 
-function onConnectedHandler (addr, port) {
+function onConnectedHandler (addr: any, port: any) {
     console.log(`* Connected to ${addr}:${port}`);
 }
 
-function onDisconnectedHandler(msg) {
+function onDisconnectedHandler(msg: any) {
     console.log(msg);
 }

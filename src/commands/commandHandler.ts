@@ -1,18 +1,21 @@
-const offset = 2;
+import { Client } from "../client/client";
+
+const offset: number = 2;
 
 class CommandHandler {
-    constructor(client) {
+    client: Client
+    constructor(client: Client) {
         this.client = client;
     }
 
-    handle(target, message) {
-        const command = message.substr(offset);
+    handle(target: any, message: string) {
+        const command = message.substring(offset);
 
         switch(command) {
             case "ping":
                 this.client.say(target, "pong");
                 break;
-            default:s
+            default:
                 console.log(`* Unknown command: ${command}`);
                 return;
         }
