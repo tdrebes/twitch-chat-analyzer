@@ -10,7 +10,7 @@ client.on('connected', onConnectedHandler);
 client.on('disconnected', onDisconnectedHandler);
 client.connect();
 
-function onMessageHandler (target: any, context: any, msg: any, self: any) {
+function onMessageHandler (target: any, context: any, msg: any, self: any): void {
     if (self) { 
         return;
     }
@@ -29,10 +29,10 @@ function onMessageHandler (target: any, context: any, msg: any, self: any) {
     console.log(`* `);
 }
 
-function onConnectedHandler (addr: any, port: any) {
+function onConnectedHandler (addr: any, port: any): void {
     console.log(`* Connected to ${addr}:${port}`);
 }
 
-function onDisconnectedHandler(msg: any) {
+function onDisconnectedHandler(msg: any): void {
     console.log(msg);
 }

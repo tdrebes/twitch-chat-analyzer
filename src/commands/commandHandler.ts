@@ -8,10 +8,10 @@ class CommandHandler {
         this.client = client;
     }
 
-    handle(message: string, target: any, context: any) {
+    handle(message: string, target: string, context: any): void {
         if (!context.mod && !('broadcaster' in context.badges)) {
             console.log('* Commands require moderator status');
-            return
+            return;
         }
 
         const command = message.substring(offset);

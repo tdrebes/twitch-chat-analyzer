@@ -8,20 +8,21 @@ class Client {
         this.client = new TMIClient(config.client);
     }
 
-    say(channel: string, message: string) {
-        this.client.say(channel, message);
+    say(channel: string, message: string): Promise<[string]> {
+        return this.client.say(channel, message);
     }
 
-    on(event: any, listener: (...args: unknown[]) => void) {
+    on(event: any, listener: (...args: unknown[]) => void): Client {
         this.client.on(event, listener);
+        return this;
     }
 
-    connect() {
-        this.client.connect();
+    connect(): Promise<[string, number]> {
+        return this.client.connect();
     }
 
-    disconnect() {
-        this.client.disconnect();
+    disconnect(): Promise<[string, number]> {
+        return this.client.disconnect();
     }
 }
 
