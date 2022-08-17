@@ -1,5 +1,12 @@
 import Sentiment from "sentiment";
 
+type SentimentReport = {
+    score: number;
+    comparative: number;
+    negative: string[];
+    positive: string[];
+};
+
 class Message {
     text: string;
     username: string;
@@ -8,7 +15,7 @@ class Message {
         this.username = username;
     }
 
-    getSentiment(): { score: number; comparative: number; negative: string[]; positive: string[]; } {
+    getSentiment(): SentimentReport {
         var sentiment = new Sentiment(undefined).analyze(this.text, undefined, undefined);
 
         return {

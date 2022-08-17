@@ -1,14 +1,24 @@
 import { Client } from './client/client';
 import { CommandHandler } from './commands/commandHandler';
-import { Message } from './message/message';
+import { ChatReport } from './data/chatReport';
+import { Datastore } from './data/datastore';
+import { Message } from './chat/message';
 
 const client = new Client();
 const commandHandler = new CommandHandler(client);
+const datastore = new Datastore;
+
+var chatReport = new ChatReport().setMaxCount(101);
 
 client.on('message', onMessageHandler);
 client.on('connected', onConnectedHandler);
 client.on('disconnected', onDisconnectedHandler);
 client.connect();
+
+setInterval(function() {
+    console.log("* Publishing Chat-Report...");
+    datastore.publishChatReport(chatReport);
+}, 10000)
 
 function onMessageHandler (target: any, context: any, msg: any, self: any): void {
     if (self) { 
@@ -24,9 +34,7 @@ function onMessageHandler (target: any, context: any, msg: any, self: any): void
 
     let message = new Message(messageText, context.username);
 
-    console.log(`* Read message (${message.username}): ${message.text}`);
-    console.log(`* Message credit score: ${message.getSentiment().score}`);
-    console.log(`* `);
+    chatReport.updateSentiment(target, message.getSentiment().score);
 }
 
 function onConnectedHandler (addr: any, port: any): void {

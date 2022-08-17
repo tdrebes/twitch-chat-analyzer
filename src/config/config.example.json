@@ -8,5 +8,10 @@
         "channels": [
             "forsen"
         ]
+    },
+    "database": {
+        "firebase": {
+            "databaseURL": "https://fire-base-url"
+        }
     }
 }
